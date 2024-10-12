@@ -34,7 +34,7 @@ function moverBotaoNao() {
         botaoNao.style.position = "static";
         botaoNao.style.left = posOriginal.left + "px";
         botaoNao.style.top = posOriginal.top + "px";
-    }, 05); // Ajuste o tempo aqui (300ms)
+    }, 3000); // Ajuste o tempo aqui (300ms)
 }
 
 // Adiciona um evento ao botão "Não"
