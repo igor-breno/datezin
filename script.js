@@ -1,30 +1,23 @@
-// Pega os elementos do botão "Não" e "Sim"
+// Pega os elementos do botão "Não" e "Sim" pelos seus respectivos IDs
 let botaoNao = document.getElementById("nao");
 let botaoSim = document.getElementById("sim");
 let mensagemErro = document.getElementById("erro");
 let caixaDialogo = document.getElementById("caixaDialogo");
 let mensagemDialogo = document.getElementById("mensagemDialogo"); 
+let botaoFecharDialogo = document.getElementById("fecharDialogo");
 
 // Armazena a posição original do botão "Não"
 let posOriginal = botaoNao.getBoundingClientRect();
 let erroExibido = false; // Variável para controlar a exibição do erro
-let moverTimeout; // Variável para armazenar o timeout de movimento
 
-// Função para mover e rodar o botão "Não"
+// Função para mover o botão "Não"
 function moverBotaoNao() {
-    // Limpa o timeout anterior, se existir
-    clearTimeout(moverTimeout);
-    
     let posX = Math.random() * (window.innerWidth - botaoNao.offsetWidth);
     let posY = Math.random() * (window.innerHeight - botaoNao.offsetHeight);
 
     botaoNao.style.position = "absolute";
     botaoNao.style.left = posX + "px";
     botaoNao.style.top = posY + "px";
-    
-    // Adiciona uma rotação aleatória
-    let rotacao = Math.random() * 360; // Gera um ângulo entre 0 e 360
-    botaoNao.style.transform = `rotate(${rotacao}deg)`;
 
     // Exibe a mensagem de erro se ainda não tiver sido exibida
     if (!erroExibido) {
@@ -34,11 +27,8 @@ function moverBotaoNao() {
         // Esconde a mensagem após 2 segundos
         setTimeout(() => {
             mensagemErro.style.display = "none";
-        }, 2000);
+        }, 1000);
     }
-
-    // Mover o botão "Não" novamente após um intervalo
-    moverTimeout = setTimeout(moverBotaoNao, 1000); // 1 segundo
 }
 
 // Adiciona um evento ao botão "Não"
@@ -54,8 +44,9 @@ botaoSim.addEventListener("click", function() {
     botaoNao.style.position = "static";
     botaoNao.style.left = posOriginal.left + "px";
     botaoNao.style.top = posOriginal.top + "px";
+});
 
-    // Para o movimento do botão "Não"
-    clearTimeout(moverTimeout);
-    erroExibido = false; // Reseta a exibição do erro
+// Adiciona um evento ao botão de fechar a caixa de diálogo
+botaoFecharDialogo.addEventListener("click", function() {
+    caixaDialogo.classList.add('oculto'); // Esconde a caixa de diálogo
 });
