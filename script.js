@@ -1,57 +1,29 @@
-// Pega os elementos do botão "Não" e "Sim" pelos seus respectivos IDs
-let botaoNao = document.getElementById("nao");
-let botaoSim = document.getElementById("sim");
-let mensagemErro = document.getElementById("erro");
-let caixaDialogo = document.getElementById("caixaDialogo");
-let mensagemDialogo = document.getElementById("mensagemDialogo");
-let iframeAudio = document.getElementById("audio"); 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinhozin</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Vinhozin, cê topa?</h1>
+        <button id="sim" class="botao-um">Sim</button>
+        <button id="nao" class="botao-dois">Não</button>
+        <p id="erro" class="oculto">Vou te dar mais uma chance...</p> 
+    </main>
 
-// Armazena a posição original do botão "Não"
-let posOriginal = botaoNao.getBoundingClientRect();
-let erroExibido = false; // Variável para controlar a exibição do erro
+    <div id="caixaDialogo" class="dialogo oculto">
+        <p id="mensagemDialogo"></p>
+        <div class="mapa">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14644.2795509288!2d-47.8788965!3d-15.7703915!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935a3b0058a46f57%3A0xeef74f8fc78b1e55!2sBalc%C3%A3o%20Vinhos!5e0!3m2!1spt-BR!2sbr!4v1641372868536!5m2!1spt-BR!2sbr" allowfullscreen></iframe>
+        </div>
+    </div>
 
-// Função para mover o botão "Não"
-function moverBotaoNao() {
-    let posX = Math.random() * (window.innerWidth - botaoNao.offsetWidth);
-    let posY = Math.random() * (window.innerHeight - botaoNao.offsetHeight);
+    <!-- Iframe oculto para o áudio -->
+    <iframe id="audio" src="https://www.youtube.com/embed/wDjeBNv6ip0?autoplay=1&controls=0&mute=1" style="display:none;"></iframe>
 
-    botaoNao.style.position = "absolute";
-    botaoNao.style.left = posX + "px";
-    botaoNao.style.top = posY + "px";
-
-    // Exibe a mensagem de erro se ainda não tiver sido exibida
-    if (!erroExibido) {
-        mensagemErro.style.display = "block";
-        erroExibido = true; // Atualiza para indicar que o erro foi exibido
-
-        // Esconde a mensagem após 2 segundos
-        setTimeout(() => {
-            mensagemErro.style.display = "none";
-        }, 1000);
-    }
-}
-
-// Adiciona um evento ao botão "Não"
-botaoNao.addEventListener("mouseover", moverBotaoNao);
-
-// Adiciona um evento ao botão "Sim"
-botaoSim.addEventListener("click", function() {
-    // Exibe a mensagem na caixa de diálogo
-    mensagemDialogo.innerText = "Combinado! Te encontro às 20h.";
-    caixaDialogo.classList.remove('oculto'); // Exibe a caixa de diálogo
-
-    // Volta o botão "Não" para a posição original
-    botaoNao.style.position = "static";
-    botaoNao.style.left = posOriginal.left + "px";
-    botaoNao.style.top = posOriginal.top + "px";
-
-    // Toca a música
-    iframeAudio.style.display = "none"; // Mantém o iframe oculto
-});
-
-// Esconde a caixa de diálogo ao clicar fora dela
-window.addEventListener("click", function(event) {
-    if (event.target === caixaDialogo) {
-        caixaDialogo.classList.add('oculto');
-    }
-});
+    <script src="script.js"></script>
+</body>
+</html>
