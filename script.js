@@ -4,7 +4,6 @@ let botaoSim = document.getElementById("sim");
 let mensagemErro = document.getElementById("erro");
 let caixaDialogo = document.getElementById("caixaDialogo");
 let mensagemDialogo = document.getElementById("mensagemDialogo");
-let iframeAudio = document.getElementById("audio"); 
 
 // Armazena a posição original do botão "Não"
 let posOriginal = botaoNao.getBoundingClientRect();
@@ -29,6 +28,13 @@ function moverBotaoNao() {
             mensagemErro.style.display = "none";
         }, 1000);
     }
+
+    // Volta o botão "Não" para a posição original após um curto período
+    setTimeout(() => {
+        botaoNao.style.position = "static";
+        botaoNao.style.left = posOriginal.left + "px";
+        botaoNao.style.top = posOriginal.top + "px";
+    }, 300); // Ajuste o tempo aqui (300ms)
 }
 
 // Adiciona um evento ao botão "Não"
@@ -44,14 +50,4 @@ botaoSim.addEventListener("click", function() {
     botaoNao.style.position = "static";
     botaoNao.style.left = posOriginal.left + "px";
     botaoNao.style.top = posOriginal.top + "px";
-
-    // Toca a música
-    iframeAudio.style.display = "none"; // Mantém o iframe oculto
-});
-
-// Esconde a caixa de diálogo ao clicar fora dela
-window.addEventListener("click", function(event) {
-    if (event.target === caixaDialogo) {
-        caixaDialogo.classList.add('oculto');
-    }
 });
