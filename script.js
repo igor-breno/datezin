@@ -40,10 +40,12 @@ botaoSim.addEventListener("click", function() {
     mensagemDialogo.innerText = "Combinado! Te encontro às 20h.";
     caixaDialogo.classList.remove('oculto'); // Exibe a caixa de diálogo
 
-    // Volta o botão "Não" para a posição original
-    botaoNao.style.position = "static";
-    botaoNao.style.left = posOriginal.left + "px";
-    botaoNao.style.top = posOriginal.top + "px";
+    // Volta o botão "Não" para a posição original após alguns segundos
+    setTimeout(() => {
+        botaoNao.style.position = "static";
+        botaoNao.style.left = posOriginal.left + "px";
+        botaoNao.style.top = posOriginal.top + "px";
+    }, 1000);
 });
 
 // Adiciona um evento ao botão de fechar a caixa de diálogo
