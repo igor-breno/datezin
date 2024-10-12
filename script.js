@@ -4,14 +4,17 @@ let botaoSim = document.getElementById("sim");
 let mensagemErro = document.getElementById("erro");
 let caixaDialogo = document.getElementById("caixaDialogo");
 let mensagemDialogo = document.getElementById("mensagemDialogo"); 
-let botaoFecharDialogo = document.getElementById("fecharDialogo");
 
 // Armazena a posição original do botão "Não"
 let posOriginal = botaoNao.getBoundingClientRect();
 let erroExibido = false; // Variável para controlar a exibição do erro
+let moverTimeout; // Variável para armazenar o timeout de movimento
 
 // Função para mover e rodar o botão "Não"
 function moverBotaoNao() {
+    // Limpa o timeout anterior, se existir
+    clearTimeout(moverTimeout);
+    
     let posX = Math.random() * (window.innerWidth - botaoNao.offsetWidth);
     let posY = Math.random() * (window.innerHeight - botaoNao.offsetHeight);
 
@@ -31,8 +34,11 @@ function moverBotaoNao() {
         // Esconde a mensagem após 2 segundos
         setTimeout(() => {
             mensagemErro.style.display = "none";
-        }, 1000);
+        }, 2000);
     }
+
+    // Mover o botão "Não" novamente após um intervalo
+    moverTimeout = setTimeout(moverBotaoNao, 1000); // 1 segundo
 }
 
 // Adiciona um evento ao botão "Não"
@@ -48,4 +54,8 @@ botaoSim.addEventListener("click", function() {
     botaoNao.style.position = "static";
     botaoNao.style.left = posOriginal.left + "px";
     botaoNao.style.top = posOriginal.top + "px";
+
+    // Para o movimento do botão "Não"
+    clearTimeout(moverTimeout);
+    erroExibido = false; // Reseta a exibição do erro
 });
