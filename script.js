@@ -46,7 +46,7 @@ botaoSim.addEventListener("click", function() {
     botaoNao.style.top = posOriginal.top + "px";
 
     // Toca a música
-    iframeAudio.style.display = "block"; // Torna o iframe visível
+    iframeAudio.style.display = "none"; // Mantém o iframe oculto
 });
 
 // Esconde a caixa de diálogo ao clicar fora dela
