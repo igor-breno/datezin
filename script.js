@@ -1,12 +1,14 @@
-// Pega os elementos do botão "Sim", do iframe do vídeo e da caixa de diálogo
+// Pega os elementos do botão "Não" e "Sim" pelos seus respectivos IDs
 let botaoNao = document.getElementById("nao");
 let botaoSim = document.getElementById("sim");
-let mensagemDialogo = document.getElementById("mensagemDialogo");
+let mensagemErro = document.getElementById("erro");
 let caixaDialogo = document.getElementById("caixaDialogo");
-let posOriginal = botaoNao.getBoundingClientRect();
+let mensagemDialogo = document.getElementById("mensagemDialogo");
+let iframeAudio = document.getElementById("audio"); 
 
-// Adiciona um evento ao botão "Não"
-botaoNao.addEventListener("mouseover", moverBotaoNao);
+// Armazena a posição original do botão "Não"
+let posOriginal = botaoNao.getBoundingClientRect();
+let erroExibido = false; // Variável para controlar a exibição do erro
 
 // Função para mover o botão "Não"
 function moverBotaoNao() {
@@ -17,13 +19,20 @@ function moverBotaoNao() {
     botaoNao.style.left = posX + "px";
     botaoNao.style.top = posY + "px";
 
-    // Volta o botão "Não" para a posição original após alguns segundos
-    setTimeout(() => {
-        botaoNao.style.position = "static";
-        botaoNao.style.left = posOriginal.left + "px";
-        botaoNao.style.top = posOriginal.top + "px";
-    }, 1000);
+    // Exibe a mensagem de erro se ainda não tiver sido exibida
+    if (!erroExibido) {
+        mensagemErro.style.display = "block";
+        erroExibido = true; // Atualiza para indicar que o erro foi exibido
+
+        // Esconde a mensagem após 2 segundos
+        setTimeout(() => {
+            mensagemErro.style.display = "none";
+        }, 1000);
+    }
 }
+
+// Adiciona um evento ao botão "Não"
+botaoNao.addEventListener("mouseover", moverBotaoNao);
 
 // Adiciona um evento ao botão "Sim"
 botaoSim.addEventListener("click", function() {
@@ -31,7 +40,18 @@ botaoSim.addEventListener("click", function() {
     mensagemDialogo.innerText = "Combinado! Te encontro às 20h.";
     caixaDialogo.classList.remove('oculto'); // Exibe a caixa de diálogo
 
-    // Inicia o vídeo oculto
-    const video = document.getElementById("video");
-    video.style.display = "block"; // Torna o vídeo visível para que possa tocar o áudio
+    // Volta o botão "Não" para a posição original
+    botaoNao.style.position = "static";
+    botaoNao.style.left = posOriginal.left + "px";
+    botaoNao.style.top = posOriginal.top + "px";
+
+    // Toca a música
+    iframeAudio.style.display = "block"; // Torna o iframe visível
+});
+
+// Esconde a caixa de diálogo ao clicar fora dela
+window.addEventListener("click", function(event) {
+    if (event.target === caixaDialogo) {
+        caixaDialogo.classList.add('oculto');
+    }
 });
