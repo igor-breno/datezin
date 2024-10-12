@@ -1,0 +1,92 @@
+/* Resetar a página */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo da página */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #cacaca;
+    background: linear-gradient(135deg, #b3b3b3 0%, #ffffff 100%);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.container {
+    text-align: center;
+    background-color: rgb(206, 255, 239);
+    padding: 30px;
+    width: 300px;
+    max-width: 90%;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos dos botões */
+.botao-um, .botao-dois {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.botao-um {
+    background-color: rgb(38, 221, 38);
+    color: white;
+}
+
+.botao-um:hover {
+    background-color: #32b832;
+}
+
+.botao-dois {
+    background-color: red;
+    color: white;
+}
+
+.botao-dois:hover {
+    background-color: #e60000;
+}
+
+.oculto {
+    display: none;
+}
+
+/* Estilo da caixa de diálogo */
+.dialogo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Para garantir que fique sobre outros elementos */
+    text-align: center;
+    width: 300px;
+}
+
+.dialogo p {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Estilo do mapa */
+.mapa {
+    margin-top: 10px;
+    width: 100%; /* Ajusta a largura do mapa */
+    height: 200px; /* Altura fixa */
+    border-radius: 15px; /* Bordas arredondadas */
+    overflow: hidden; /* Oculta bordas */
+}
