@@ -1,15 +1,16 @@
-// Pega os elementos do botão "Não" e "Sim" pelos seus respectivos IDs
+// Pega os elementos do botão "Não" e "Sim"
 let botaoNao = document.getElementById("nao");
 let botaoSim = document.getElementById("sim");
 let mensagemErro = document.getElementById("erro");
 let caixaDialogo = document.getElementById("caixaDialogo");
-let mensagemDialogo = document.getElementById("mensagemDialogo");
+let mensagemDialogo = document.getElementById("mensagemDialogo"); 
+let botaoFecharDialogo = document.getElementById("fecharDialogo");
 
 // Armazena a posição original do botão "Não"
 let posOriginal = botaoNao.getBoundingClientRect();
 let erroExibido = false; // Variável para controlar a exibição do erro
 
-// Função para mover o botão "Não"
+// Função para mover e rodar o botão "Não"
 function moverBotaoNao() {
     let posX = Math.random() * (window.innerWidth - botaoNao.offsetWidth);
     let posY = Math.random() * (window.innerHeight - botaoNao.offsetHeight);
@@ -17,6 +18,10 @@ function moverBotaoNao() {
     botaoNao.style.position = "absolute";
     botaoNao.style.left = posX + "px";
     botaoNao.style.top = posY + "px";
+    
+    // Adiciona uma rotação aleatória
+    let rotacao = Math.random() * 360; // Gera um ângulo entre 0 e 360
+    botaoNao.style.transform = `rotate(${rotacao}deg)`;
 
     // Exibe a mensagem de erro se ainda não tiver sido exibida
     if (!erroExibido) {
@@ -28,13 +33,6 @@ function moverBotaoNao() {
             mensagemErro.style.display = "none";
         }, 1000);
     }
-
-    // Volta o botão "Não" para a posição original após um curto período
-    setTimeout(() => {
-        botaoNao.style.position = "static";
-        botaoNao.style.left = posOriginal.left + "px";
-        botaoNao.style.top = posOriginal.top + "px";
-    }, 3000); // Ajuste o tempo aqui (300ms)
 }
 
 // Adiciona um evento ao botão "Não"
